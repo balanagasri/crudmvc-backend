@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const cors = require('cors');  // Only require cors once
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors());  // Use cors middleware once
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/studentdb', {
@@ -23,8 +23,7 @@ const studentSchema = new mongoose.Schema({
 });
 
 const Student = mongoose.model('Student', studentSchema);
-const cors = require('cors');
-app.use(cors());
+
 // API Endpoints
 app.get('/api/students', async (req, res) => {
     const students = await Student.find();
