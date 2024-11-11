@@ -9,10 +9,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Handle GET request to the root URL
+app.get('/', (req, res) => {
+    res.send('Welcome to the CRUD MVC Backend API');
+});
+
 // Connect to MongoDB using the environment variable
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error(err));
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
 
 // Define Student Schema
 const studentSchema = new mongoose.Schema({
