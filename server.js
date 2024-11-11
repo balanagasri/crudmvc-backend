@@ -1,19 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');  // Only require cors once
+const cors = require('cors');
+require('dotenv').config();  // Add this line to load environment variables
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());  // Use cors middleware once
+app.use(cors());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/studentdb', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+// Connect to MongoDB using the environment variable
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error(err));
 
 // Define Student Schema
 const studentSchema = new mongoose.Schema({
